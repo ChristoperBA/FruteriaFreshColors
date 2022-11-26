@@ -4,9 +4,9 @@ package com.mycompany.fruteriafreshcolors;
 import javax.swing.JTextField;
 
 
-public class Usuarios {
+public class Usuario {
     //Inicializa el Array
-    private Usuarios[] usuario  = new Usuarios[10];
+    private Usuario[] usuario  = new Usuario[10];
     
     //Atributos
     private String Nombre;
@@ -16,7 +16,7 @@ public class Usuarios {
     private String Estado;
     
     //Constructores
-    public Usuarios()
+    public Usuario()
     {
         Nombre="";
         Apellidos="";
@@ -26,7 +26,7 @@ public class Usuarios {
         
     }
     
-    public Usuarios(String Nombre, String Apellidos, String Nickname, String Password, String Estado) {
+    public Usuario(String Nombre, String Apellidos, String Nickname, String Password, String Estado) {
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
         this.Nickname = Nickname;
@@ -37,15 +37,15 @@ public class Usuarios {
     {
         for (int i=0;i<100;i++)
         {
-            usuario[i]= new Usuarios();     
+            usuario[i]= new Usuario();     
         }
     }
 
-    public Usuarios[] getUsuario() {
+    public Usuario[] getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios[] usuario) {
+    public void setUsuario(Usuario[] usuario) {
         this.usuario = usuario;
     }
 

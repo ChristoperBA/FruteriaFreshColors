@@ -19,8 +19,10 @@ public class guardarUsuario extends javax.swing.JFrame {
         setResizable(false);//Desacctivar bototn de ajustar
         
     }
-    Usuarios[] usuarios  = new Usuarios[10];
-    Usuarios user =new Usuarios();
+    Cliente[] clientes  = new Cliente[10];
+    Empleado[] empleados  = new Empleado[10];
+    Empleado empleado =new Empleado();
+    Cliente cliente = new Cliente();
     
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,6 +39,8 @@ public class guardarUsuario extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +77,8 @@ public class guardarUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Password:");
 
+        jLabel6.setText("Tipo de Usuario: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,9 +94,11 @@ public class guardarUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField5)
                                     .addComponent(jTextField1)
                                     .addComponent(jTextField2)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
@@ -100,7 +108,7 @@ public class guardarUsuario extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +131,11 @@ public class guardarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -149,7 +161,8 @@ public class guardarUsuario extends javax.swing.JFrame {
     {
         for (int i=0;i<10;i++)
         { 
-            usuarios[i]= new Usuarios();
+            clientes[i]= new Cliente();
+            empleados[i]= new Empleado();
         }
     }
 
@@ -167,7 +180,7 @@ public class guardarUsuario extends javax.swing.JFrame {
             for (int i = 0; i < 10; i++)
             {
 
-                if (usuarios[i].getNickname().equals(jTextField1.getText()))
+                if (clientes[i].getNickname().equals(jTextField1.getText()))
                 {
                     JOptionPane.showMessageDialog(null, "¡Datos ya existen!",
                         "Datos ya existen", JOptionPane.ERROR_MESSAGE);
@@ -175,21 +188,45 @@ public class guardarUsuario extends javax.swing.JFrame {
                 }
             }
             if(registro){
-                user.setNombre(jTextField1.getText());
-                user.setApellidos(jTextField2.getText());
-                user.setNickname(jTextField3.getText());
-                user.setPassword(jTextField4.getText());
-                user.setEstado("Activo");
-
+                if(jTextField5.getText().equals("Cliente")){
+                    cliente.setNombre(jTextField1.getText());
+                    cliente.setApellidos(jTextField2.getText());
+                    cliente.setNickname(jTextField3.getText());
+                    cliente.setPassword(jTextField4.getText());
+                    cliente.setEstado("Activo");
+                    cliente.setCategoria(jTextField5.getText());
+                    DataOutputStream salida = new DataOutputStream(new FileOutputStream("usuarios.dat", true));
+                    salida.writeUTF(cliente.getNombre());
+                    salida.writeUTF(cliente.getApellidos());
+                    salida.writeUTF(cliente.getPassword());
+                    salida.writeUTF(cliente.getEstado());
+                    salida.writeUTF("Cliente");
+                    JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!","Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+                    limpiar();
+                    salida.close();
+                    
+                }else if(jTextField5.getText().equals("Empleado")){
+                    empleado.setNombre(jTextField1.getText());
+                    empleado.setApellidos(jTextField2.getText());
+                    empleado.setNickname(jTextField3.getText());
+                    empleado.setPassword(jTextField4.getText());
+                    empleado.setEstado("Activo");
+                    empleado.setPuesto(jTextField5.getText());
+                    DataOutputStream salida = new DataOutputStream(new FileOutputStream("usuarios.dat", true));
+                    salida.writeUTF(empleado.getNombre());
+                    salida.writeUTF(empleado.getApellidos());
+                    salida.writeUTF(empleado.getPassword());
+                    salida.writeUTF(empleado.getEstado());
+                    salida.writeUTF("Empleado");
+                    JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!","Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+                    limpiar();
+                    salida.close();
+                
+                }else{
+                    JOptionPane.showMessageDialog(null, "No existe Usuario tipo: "+jTextField5.getText(),"No se puede guardar informacion" , JOptionPane.ERROR_MESSAGE);
+                }
             }
-            DataOutputStream salida = new DataOutputStream(new FileOutputStream("usuarios.dat", true));
-            salida.writeUTF(user.getNombre());
-            salida.writeUTF(user.getApellidos());
-            salida.writeUTF(user.getPassword());
-            salida.writeUTF(user.getEstado());
-            JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!","Datos agregados", JOptionPane.INFORMATION_MESSAGE);
-            limpiar();
-            salida.close();
+            
         }catch (IOException ex01) {
         JOptionPane.showMessageDialog(null, "¡Ocurrió un error al guardar!",
                 "Error al guardar", JOptionPane.ERROR_MESSAGE);
@@ -202,6 +239,7 @@ public class guardarUsuario extends javax.swing.JFrame {
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
+        jTextField5.setText("");
     }
     public static void main(String args[]) {
        
@@ -220,9 +258,11 @@ public class guardarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
