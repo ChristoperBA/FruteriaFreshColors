@@ -9,6 +9,7 @@ public class Usuario {
     private Usuario[] usuario  = new Usuario[10];
     
     //Atributos
+    private int IdUsuario;
     private String Nombre;
     private String Apellidos;
     private String Nickname;
@@ -18,6 +19,7 @@ public class Usuario {
     //Constructores
     public Usuario()
     {
+        IdUsuario=0;
         Nombre="";
         Apellidos="";
         Nickname="";
@@ -26,7 +28,8 @@ public class Usuario {
         
     }
     
-    public Usuario(String Nombre, String Apellidos, String Nickname, String Password, String Estado) {
+    public Usuario(int IdUsuario,String Nombre, String Apellidos, String Nickname, String Password, String Estado) {
+        this.IdUsuario=IdUsuario;
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
         this.Nickname = Nickname;
@@ -41,14 +44,7 @@ public class Usuario {
         }
     }
 
-    public Usuario[] getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario[] usuario) {
-        this.usuario = usuario;
-    }
-
+  
     public String getNombre() {
         return Nombre;
     }
@@ -88,7 +84,19 @@ public class Usuario {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
-    //
+
+    public int getIdUsuario() {
+        return IdUsuario;
+    }
+
+    public void setIdUsuario(int IdUsuario) {
+        this.IdUsuario = IdUsuario;
+    }
+
+    
+
+   
+    
     
 
 }

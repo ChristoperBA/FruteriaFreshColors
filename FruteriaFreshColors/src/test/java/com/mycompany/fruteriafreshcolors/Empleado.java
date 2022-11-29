@@ -5,17 +5,16 @@ package com.mycompany.fruteriafreshcolors;
 public class Empleado extends Usuario {
      private String Puesto;
 
+    
     public Empleado() {
-        this.Puesto ="";
+        this.Puesto = "";
     }
 
-
-    public Empleado(String Puesto, String Nombre, String Apellidos, String Nickname, String Password, String Estado) {
-        super(Nombre, Apellidos, Nickname, Password, Estado);
+    public Empleado(int IdUsuario, String Nombre, String Apellidos, String Nickname, String Password, String Estado,String Puesto) {
+        super(IdUsuario, Nombre, Apellidos, Nickname, Password, Estado);
         this.Puesto = Puesto;
     }
 
-     
     public String getPuesto() {
         return Puesto;
     }
@@ -23,6 +22,8 @@ public class Empleado extends Usuario {
     public void setPuesto(String Puesto) {
         this.Puesto = Puesto;
     }
+
+    
 
    
 }
