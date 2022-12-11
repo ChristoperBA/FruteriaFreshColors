@@ -165,6 +165,12 @@ public final class Cajas extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -186,13 +192,14 @@ public final class Cajas extends javax.swing.JFrame {
 
         modelo.addColumn("id");
         modelo.addColumn("Articulo");
+        modelo.addColumn("Cantidad");
         modelo.addColumn("Precio");
 
         paramTablaTotalDatos.setModel(modelo);
 
-        sql = "SELECT * FROM Cajas;";
+        sql = "SELECT * FROM ventas;";
 
-        String[] datos = new String[3];
+        String[] datos = new String[4];
         Statement st;
 
         try {
@@ -202,19 +209,19 @@ public final class Cajas extends javax.swing.JFrame {
 
             while (rs.next()) {
                 datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
+                datos[1]= rs.getString(3);
+                datos[2] = rs.getString(5);
+                datos[3] = rs.getString(6);
+ 
 
                 modelo.addRow(datos);
-                //Object a = modelo.getValueAt(modelo.findColumn(sql), 3);
-                //System.out.println(a);
             }
 
             paramTablaTotalDatos.setModel(modelo);
             
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros, erro: " + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros, error: " + e.toString());
         }
     }
     

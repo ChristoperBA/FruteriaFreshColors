@@ -1,12 +1,10 @@
 package com.mycompany.fruteriafreshcolors;
 
-import java.io.IOException;
-import javax.swing.JOptionPane;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.ArrayList;
+
+import java.sql.CallableStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -343,7 +341,25 @@ public class ControlUsuarios extends javax.swing.JFrame {
                 clientes[Integer.parseInt(jTextField6.getText()) - 1] = new Cliente(Integer.parseInt(jTextField6.getText()), jTextField2.getText(),
                         jTextField3.getText(), jTextField1.getText(), jTextField4.getText(), "Activo", "Cliente"
                 );
-                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!", "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+                
+                String sql = "INSERT INTO usuarios (Nombre, Apellidos, Nickname, Password, Estado, Categoria) VALUES(?,?,?,?,?,?)";
+            
+            Conexion conexion = new Conexion();
+        try {
+            CallableStatement cs = conexion.conectar().prepareCall(sql);
+            
+            cs.setString(1, jTextField2.getText());
+            cs.setString(2, jTextField3.getText());
+           cs.setString(3, jTextField1.getText());
+            cs.setString(4, jTextField4.getText());
+            cs.setString(5, "Activo");
+            cs.setString(6, "Cliente");
+
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!", "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(CatalogoClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 limpiar();
 
             } else if (jComboBox1.getSelectedItem().toString().equals("Empleado"))

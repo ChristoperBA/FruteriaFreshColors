@@ -1,7 +1,11 @@
 package com.mycompany.fruteriafreshcolors;
 
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CatalogoClientes extends javax.swing.JFrame {
@@ -18,6 +22,7 @@ public class CatalogoClientes extends javax.swing.JFrame {
     public void agregar() {
         listaClientes.add(new Clientes(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(), jTextField7.getText(), jTextField8.getText()));
         JOptionPane.showMessageDialog(null, "Cliente agregado con exito :)");
+ 
     }
 
     public void eliminar() {

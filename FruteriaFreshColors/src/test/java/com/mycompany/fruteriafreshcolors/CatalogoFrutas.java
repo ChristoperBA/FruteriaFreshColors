@@ -5,8 +5,12 @@ import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CatalogoFrutas extends javax.swing.JFrame {
@@ -23,9 +27,29 @@ public class CatalogoFrutas extends javax.swing.JFrame {
     }
 
     public void agregar() {
-//       (String nombre, String descripcion, int cantidadExistente, int precio, int proveedor, int temporada)
-        listaFrutas.add(new Frutas(jTextField1.getText(), jTextField2.getText(),Integer.parseInt(jTextField3.getText()),Integer.parseInt(jTextField4.getText()),jComboBox1.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString()));
-        JOptionPane.showMessageDialog(null, "Frutas agregado con exito :)");
+        try {
+            //       (String nombre, String descripcion, int cantidadExistente, int precio, int proveedor, int temporada)
+            listaFrutas.add(new Frutas(jTextField1.getText(), jTextField2.getText(),Integer.parseInt(jTextField3.getText()),Integer.parseInt(jTextField4.getText()),jComboBox1.getSelectedItem().toString(),jComboBox3.getSelectedItem().toString()));
+          
+            
+            String sql = "INSERT INTO catalogoFrutas (Nombre, Descripcion, Cantidad, Precio, Provedor, Temporada) VALUES(?,?,?,?,?,?)";
+            
+            Conexion conexion = new Conexion();
+            CallableStatement cs = conexion.conectar().prepareCall(sql);
+            
+            cs.setString(1, jTextField1.getText());
+            cs.setString(2, jTextField2.getText());
+            cs.setDouble(3, Double.parseDouble(jTextField3.getText()));
+            cs.setDouble(4, Double.parseDouble(jTextField4.getText()));
+            cs.setString(5, jComboBox1.getSelectedItem().toString());
+            cs.setString(6, jComboBox3.getSelectedItem().toString());
+            
+            cs.execute();
+              JOptionPane.showMessageDialog(null, "Frutas agregado con exito :)");
+        } catch (SQLException ex) {
+            Logger.getLogger(CatalogoFrutas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void eliminar() {

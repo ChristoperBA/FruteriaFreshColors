@@ -1,5 +1,11 @@
 package com.mycompany.fruteriafreshcolors;
 
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Acceso extends javax.swing.JFrame {
@@ -127,27 +133,54 @@ public class Acceso extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    public String ab = "";
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        String Usuario = "admin";
-
-        String Pass = new String(jPasswordField1.getPassword());
-        if (jTextField1.getText().equals(Usuario))
-        {
+        try {
+            String Usuario = "admin";
+            
+            String Pass = new String(jPasswordField1.getPassword());
+            if (jTextField1.getText().equals(Usuario))
+            {
             String Contrasena = "123";
             if (Pass.equals(Contrasena))
             {
-                MenuPrincipal On = new MenuPrincipal();
-                On.setVisible(true);
+            MenuPrincipal On = new MenuPrincipal();
+            On.setVisible(true);
             } else
             {
-
-                JOptionPane.showMessageDialog(null, "La contraseña es incorrecta,\nIntentalo nuevamente:(", "La contraseña es incorrecta,\nIntentalo nuevamente:(", JOptionPane.ERROR_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta,\nIntentalo nuevamente:(", "La contraseña es incorrecta,\nIntentalo nuevamente:(", JOptionPane.ERROR_MESSAGE);
             }
-        } else
-        {
+            } else
+            {
             JOptionPane.showMessageDialog(null, "El usuario: " + jTextField1.getText() + ", no esta registrado como un administrador\n:(", "El usuario: " + jTextField1.getText() + ", no esta registrado como un administrador\n:(", JOptionPane.ERROR_MESSAGE);
-
+            
+            }
+            
+            Conexion conexion = new Conexion();
+            
+            String sql = "SELECT * FROM usuarios;";
+            String a[] = new String[4];
+            Statement st;
+            
+            st = conexion.conectar().createStatement();
+             ResultSet rs = st.executeQuery(sql);
+             
+             while (rs.next()) {
+                 a[0] = rs.getString(2);
+                 a[1] = rs.getString(4);
+                 a[2] = rs.getString(5);
+                 a[3] = rs.getString(7);
+                 ab = a[0];
+                 
+             }
+             if(this.jTextField1.getText().equals(a[0]) && this.jPasswordField1.getText().equals(a[2]) && a[3].toLowerCase().equals("cliente")){
+  
+                 new ComprarProductos().setVisible(true);
+                 this.setVisible(false);
+             }
+        } catch (SQLException ex) {
+            Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
