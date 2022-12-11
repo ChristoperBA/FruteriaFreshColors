@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2022 a las 05:51:45
+-- Tiempo de generación: 12-12-2022 a las 00:02:04
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -31,8 +31,8 @@ CREATE TABLE `catalogofrutas` (
   `IdCatalogoFrutas` int(11) NOT NULL,
   `Nombre` varchar(255) NOT NULL,
   `Descripcion` varchar(255) NOT NULL,
-  `Cantidad` double NOT NULL,
-  `Precio` double NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Precio` int(11) NOT NULL,
   `Provedor` varchar(255) NOT NULL,
   `Temporada` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -66,7 +66,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`IdUsuarios`, `Nombre`, `Apellidos`, `Nickname`, `Password`, `Estado`, `Categoria`) VALUES
-(1, 'ASD', 'A2D', 'ASD', 'ASD', 'Activo', 'Cliente');
+(1, 'ASD', 'A2D', 'ASD', 'ASD', 'Activo', 'Cliente'),
+(2, 'Roberyo', 'Luis', 'Sapo', 'Admin1234', 'Activo', 'Empleado');
 
 -- --------------------------------------------------------
 
@@ -79,8 +80,8 @@ CREATE TABLE `ventas` (
   `Cliente` varchar(255) NOT NULL,
   `Fruta` varchar(255) NOT NULL,
   `Descripcion` varchar(255) NOT NULL,
-  `Cantidad` double NOT NULL,
-  `Precio` double NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Precio` int(11) NOT NULL,
   `Fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -89,7 +90,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`IdVentas`, `Cliente`, `Fruta`, `Descripcion`, `Cantidad`, `Precio`, `Fecha`) VALUES
-(1, 'ASD', 'ASD', 'ASASADADADADADA', 23, 12323, '2022-12-10');
+(10, 'ASD', 'a', 'asada', 2, 1000, '2022-12-11'),
+(11, 'ASD', 'B', 'asas', 4, 111, '2022-12-11');
 
 --
 -- Índices para tablas volcadas
@@ -127,13 +129,13 @@ ALTER TABLE `catalogofrutas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `IdUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `IdVentas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdVentas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
