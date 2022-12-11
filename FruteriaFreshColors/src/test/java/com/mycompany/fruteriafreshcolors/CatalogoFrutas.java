@@ -39,8 +39,8 @@ public class CatalogoFrutas extends javax.swing.JFrame {
             
             cs.setString(1, jTextField1.getText());
             cs.setString(2, jTextField2.getText());
-            cs.setDouble(3, Double.parseDouble(jTextField3.getText()));
-            cs.setDouble(4, Double.parseDouble(jTextField4.getText()));
+            cs.setInt(3, Integer.parseInt(jTextField3.getText()));
+            cs.setInt(4, Integer.parseInt(jTextField4.getText()));
             cs.setString(5, jComboBox1.getSelectedItem().toString());
             cs.setString(6, jComboBox3.getSelectedItem().toString());
             
@@ -161,15 +161,12 @@ public class CatalogoFrutas extends javax.swing.JFrame {
         jLabel4.setText("Precio");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
-        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\home.png")); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 60, 60));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\logominus.png")); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 90, 60));
 
         jLabel9.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
@@ -251,7 +248,6 @@ public class CatalogoFrutas extends javax.swing.JFrame {
         jLabel10.setOpaque(true);
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 80));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\luke-chesser-pJadQetzTkI-unsplash.jpg")); // NOI18N
         jLabel12.setText("jLabel12");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 770, 410));
 

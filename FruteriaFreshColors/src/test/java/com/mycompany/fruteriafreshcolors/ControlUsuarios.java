@@ -76,7 +76,6 @@ public class ControlUsuarios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\home.png")); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -88,8 +87,6 @@ public class ControlUsuarios extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Usuarios");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 20));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\logominus.png")); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 60));
 
         jLabel16.setBackground(new java.awt.Color(255, 102, 51));
@@ -247,8 +244,6 @@ public class ControlUsuarios extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Visualizar Datos");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 142, 30));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christopher Briceño\\Documents\\ProyectoClienteServidor\\FruteriaFreshColors\\src\\test\\java\\com\\mycompany\\images\\BackgroundUser.jpg")); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 810, 710));
 
         jLabel13.setText("Tipo de Usuario: ");
@@ -327,6 +322,7 @@ public class ControlUsuarios extends javax.swing.JFrame {
         }
         if (registro)
         {
+            String sql = "INSERT INTO usuarios (Nombre, Apellidos, Nickname, Password, Estado, Categoria) VALUES(?,?,?,?,?,?)";
             if (jComboBox1.getSelectedItem().toString().equals("Cliente"))
             {
 
@@ -342,7 +338,7 @@ public class ControlUsuarios extends javax.swing.JFrame {
                         jTextField3.getText(), jTextField1.getText(), jTextField4.getText(), "Activo", "Cliente"
                 );
                 
-                String sql = "INSERT INTO usuarios (Nombre, Apellidos, Nickname, Password, Estado, Categoria) VALUES(?,?,?,?,?,?)";
+                
             
             Conexion conexion = new Conexion();
         try {
@@ -376,7 +372,23 @@ public class ControlUsuarios extends javax.swing.JFrame {
                 empleados[Integer.parseInt(jTextField6.getText()) - 1] = new Empleado(Integer.parseInt(jTextField6.getText()), jTextField2.getText(),
                         jTextField3.getText(), jTextField1.getText(), jTextField4.getText(), "Activo", "Empleado"
                 );
-                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!", "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+                
+                 Conexion conexion = new Conexion();
+        try {
+            CallableStatement cs = conexion.conectar().prepareCall(sql);
+            
+            cs.setString(1, jTextField2.getText());
+            cs.setString(2, jTextField3.getText());
+           cs.setString(3, jTextField1.getText());
+            cs.setString(4, jTextField4.getText());
+            cs.setString(5, "Activo");
+            cs.setString(6, "Empleado");
+
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!", "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(CatalogoClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 limpiar();
 
             }

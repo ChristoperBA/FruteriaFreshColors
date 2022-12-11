@@ -16,6 +16,7 @@ public class Acceso extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
     }
+    public static String Nombre = "";
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -133,10 +134,10 @@ public class Acceso extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-    public String ab = "";
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        try {
-            String Usuario = "admin";
+       try {
+            /*String Usuario = "admin";
             
             String Pass = new String(jPasswordField1.getPassword());
             if (jTextField1.getText().equals(Usuario))
@@ -155,7 +156,7 @@ public class Acceso extends javax.swing.JFrame {
             {
             JOptionPane.showMessageDialog(null, "El usuario: " + jTextField1.getText() + ", no esta registrado como un administrador\n:(", "El usuario: " + jTextField1.getText() + ", no esta registrado como un administrador\n:(", JOptionPane.ERROR_MESSAGE);
             
-            }
+            }*/
             
             Conexion conexion = new Conexion();
             
@@ -171,13 +172,20 @@ public class Acceso extends javax.swing.JFrame {
                  a[1] = rs.getString(4);
                  a[2] = rs.getString(5);
                  a[3] = rs.getString(7);
-                 ab = a[0];
+                 
                  
              }
              if(this.jTextField1.getText().equals(a[0]) && this.jPasswordField1.getText().equals(a[2]) && a[3].toLowerCase().equals("cliente")){
-  
+                 Nombre = a[0];
+                 System.out.println(a[0]);
                  new ComprarProductos().setVisible(true);
                  this.setVisible(false);
+             }else if((this.jTextField1.getText().equals(a[0]) && this.jPasswordField1.getText().equals(a[2]) && a[3].toLowerCase().equals("empleado"))){
+                 Nombre = a[0];
+                 new MenuPrincipal().setVisible(true);
+                 this.setVisible(false);
+             }else{
+                 JOptionPane.showMessageDialog(null, "La contraseña o usuario son incorrectos,\nIntentalo nuevamente:(", "La contraseña o usuario son incorrecto,\nIntentalo nuevamente:(", JOptionPane.ERROR_MESSAGE);
              }
         } catch (SQLException ex) {
             Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,4 +222,5 @@ public class Acceso extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
